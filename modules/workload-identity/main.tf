@@ -15,17 +15,17 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
   }
 
   attribute_mapping = {
-    "google.subject"       = "assertion.sub"
-    "attribute.repository" = "assertion.repository"
+    "google.subject"             = "assertion.sub"
+    "attribute.repository"       = "assertion.repository"
     "attribute.repository_owner" = "assertion.repository_owner"
-    "attribute.ref"        = "assertion.ref"
+    "attribute.ref"              = "assertion.ref"
   }
 
-  attribute_condition = "assertion.repository == 'staocubee'"
+  attribute_condition = "assertion.repository_owner == '${var.github_repository_owner}'"
 }
 
 resource "google_service_account_iam_member" "github_wif" {
   service_account_id = "projects/${var.project_id}/serviceAccounts/${var.service_account_email}"
   role               = "roles/iam.workloadIdentityUser"
-  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.pool.name}/attribute.repository/${var.github_repository}"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.pool.name}/attribute.repository_owner/${var.github_repository_owner}"
 }

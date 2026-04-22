@@ -17,3 +17,6 @@ variable "github_repository" {
 variable "service_account_email" {
   type = string
 }
+variable "github_repository_owner" {
+  type = string
+}
