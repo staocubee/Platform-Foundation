@@ -9,6 +9,10 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: dev-foundation
+  cancel-in-progress: true
+
 jobs:
   foundation:
     runs-on: ubuntu-latest
