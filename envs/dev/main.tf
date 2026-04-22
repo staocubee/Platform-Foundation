@@ -11,4 +11,5 @@ module "workload_identity" {
   provider_id           = var.provider_id
   github_repository     = var.github_repository
   service_account_email = var.service_account_email
+  github_repository_owner = var.github_repository_owner
 }
