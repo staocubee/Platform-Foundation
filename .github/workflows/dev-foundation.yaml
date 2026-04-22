@@ -36,10 +36,12 @@ jobs:
         working-directory: envs/dev
         run: terraform init
 
-      - name: Terraform validate
+      - name: Terraform plan
         working-directory: envs/dev
-        run: terraform validate
+        run: terraform plan -no-color
 
       - name: Terraform apply
         working-directory: envs/dev
-        run: terraform apply -auto-approve
+        env:
+          TF_LOG: INFO
+        run: terraform apply -auto-approve -no-color
